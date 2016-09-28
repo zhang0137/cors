@@ -172,6 +172,9 @@ func Allow(opts *Options) http.HandlerFunc {
 		opts.AllowHeaders = defaultAllowHeaders
 	}
 
+	// Reset empty on the global regex patterns
+	allowOriginPatterns = []string{}
+
 	for _, origin := range opts.AllowOrigins {
 		pattern := regexp.QuoteMeta(origin)
 		pattern = strings.Replace(pattern, "\\*", ".*", -1)
